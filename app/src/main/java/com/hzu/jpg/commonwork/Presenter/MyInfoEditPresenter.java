@@ -119,9 +119,9 @@ public class MyInfoEditPresenter {
         if (activity.getRealName().equals("")) {
             return false;
         }
-        if (activity.getIdCard().equals("")) {
+        /*if (activity.getIdCard().equals("")) {
             return false;
-        }
+        }*/
         if (activity.getSchool().equals("")) {
             return false;
         }
@@ -132,7 +132,7 @@ public class MyInfoEditPresenter {
     }
 
     private  boolean checkLegal(){
-        if(activity.getIdCard().length()<15)
+        if (activity.getIdCard() != null && !"".equals(activity.getIdCard()) && activity.getIdCard().length() < 15)
             return false;
         String birthday=activity.getBirthday();
         if(!birthday.isEmpty()) {

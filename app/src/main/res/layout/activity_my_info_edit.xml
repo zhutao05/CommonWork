@@ -159,7 +159,7 @@
                 android:id="@+id/et_my_info_edit_id_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                chow:my_info_title="*身份证号："
+                chow:my_info_title="身份证号："
                 android:layout_marginTop="1dp">
 
             </com.hzu.jpg.commonwork.widgit.MyEditLayout>
