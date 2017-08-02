@@ -58,6 +58,20 @@
         android:layout_height="1dp"
         android:background="@color/colorHui" />
 
+    <TextView
+        android:id="@+id/tv_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="15dp"
+        android:text="收货地址"
+        android:textSize="@dimen/normal_string_size" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorHui" />
+
     <Button
         android:id="@+id/btn_setting_exit"
         android:layout_width="match_parent"

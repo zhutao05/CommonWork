@@ -161,6 +161,8 @@
         <activity android:name=".activity.goods.GoodsDetailActivity" />
         <activity android:name=".activity.MobileBindingActivity" />
         <activity android:name=".activity.BindingUserActivity" />
+        <activity android:name=".activity.MyAddressActivity" />
+        <activity android:name=".activity.AddAddressActivity" />
 
         <receiver
             android:name=".utils.AppRegister"

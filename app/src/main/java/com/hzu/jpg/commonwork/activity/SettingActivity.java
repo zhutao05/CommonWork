@@ -36,6 +36,7 @@ public class SettingActivity extends AppCompatActivity {
     TextView tvUpdate;
     ImageButton ib;
     TextView tvResetPwd;
+    TextView tvAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +45,12 @@ public class SettingActivity extends AppCompatActivity {
         tvUpdate= (TextView) findViewById(R.id.tv_setting_update);
         btnExit= (Button) findViewById(R.id.btn_setting_exit);
         tvResetPwd = (TextView) findViewById(R.id.tv_resetPwd);
+        tvAddress = (TextView) findViewById(R.id.tv_address);
         ib= (ImageButton) findViewById(R.id.ib_setting_back);
         if(MyApplication.user==null){
             btnExit.setVisibility(View.GONE);
             tvResetPwd.setVisibility(View.GONE);
+            tvAddress.setVisibility(View.GONE);
         }
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,6 +124,14 @@ public class SettingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SettingActivity.this,RegisterSetPwdActivity.class);
                 intent.putExtra("isSetPwd",true);
+                startActivity(intent);
+            }
+        });
+
+        tvAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SettingActivity.this,MyAddressActivity.class);
                 startActivity(intent);
             }
         });
