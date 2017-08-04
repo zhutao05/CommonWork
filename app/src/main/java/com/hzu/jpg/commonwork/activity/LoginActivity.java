@@ -173,7 +173,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void userLogin() {
-        NameValuePair username = new BasicNameValuePair(Config.KEY_USER_NAME, phoneNum);
+        /*NameValuePair username = new BasicNameValuePair(Config.KEY_USER_NAME, phoneNum);
         NameValuePair pwd = new BasicNameValuePair(Config.KEY_PASSWORD, password);
         List<NameValuePair> params = new ArrayList<>();
         params.add(username);
@@ -203,9 +203,9 @@ public class LoginActivity extends AppCompatActivity {
             e.printStackTrace();
             Log.e(TAG, "onResponse: " + e.getMessage(), null);
             ToastUtil.showToast("登录失败");
-        }
+        }*/
 
-        /*final AlertDialog dialog = DialogUtil.showLoadingDialog(this);
+        final AlertDialog dialog = DialogUtil.showLoadingDialog(this);
         OkHttpUtils.post().url(Config.URL_STUDENT_LOGIN)
                 .addParams(Config.KEY_USER_NAME, phoneNum)
                 .addParams(Config.KEY_PASSWORD, password)
@@ -245,7 +245,7 @@ public class LoginActivity extends AppCompatActivity {
                     ToastUtil.showToast("登录失败");
                 }
             }
-        });*/
+        });
     }
 
     public void getUserInfo(JSONObject jsonObject) {
@@ -257,7 +257,7 @@ public class LoginActivity extends AppCompatActivity {
             MyApplication.user.setOwnAgentId(jsonObject.getInt("ownAgentId"));
             MyApplication.user.setOwnAgentStatus(jsonObject.getInt("ownAgentStatus"));
             EventBus.getDefault().post(new LoginEvent(true));
-            //SharedPreferencesUtil.saveUserMsg(phoneNum, password);
+            SharedPreferencesUtil.saveUserMsg(phoneNum, password);
             Log.e(TAG, "onResponse: " + user, null);
             startStuGetTokenService();
             finish();

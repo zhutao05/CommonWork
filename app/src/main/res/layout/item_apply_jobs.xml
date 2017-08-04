@@ -7,7 +7,7 @@
     android:layout_marginRight="10dip"
     android:layout_marginTop="10dip"
     android:background="@color/white"
-    app:cardCornerRadius="2dp">
+    app:cardCornerRadius="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +27,6 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:padding="10dip"
-                android:text="公司直招普工8000+三险一金"
                 android:textColor="@color/black_4"
                 android:textSize="15sp" />
 
@@ -38,8 +37,18 @@
                 android:layout_below="@+id/tv_title"
                 android:paddingBottom="10dip"
                 android:paddingLeft="10dip"
-                android:text="2800-4000元/月"
                 android:textColor="@color/salary"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_recruits_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_title"
+                android:layout_toRightOf="@+id/tv_salary_title"
+                android:paddingBottom="10dip"
+                android:paddingLeft="10dip"
+                android:textColor="@color/black9"
                 android:textSize="14sp" />
 
             <TextView
@@ -48,7 +57,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:padding="10dip"
-                android:text="02-23"
                 android:textColor="@color/black_4"
                 android:visibility="visible" />
 
@@ -71,7 +79,6 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:padding="3dp"
-                    android:text="五险一金"
                     android:textColor="@color/colorPrimary"
                     android:textSize="13sp"
                     android:visibility="invisible" />
@@ -86,7 +93,6 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:padding="3dp"
-                    android:text="五险一金"
                     android:textColor="@color/colorPrimary"
                     android:textSize="13sp"
                     android:visibility="invisible" />
@@ -101,7 +107,6 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:padding="3dp"
-                    android:text="五险一金"
                     android:textColor="@color/colorPrimary"
                     android:textSize="13sp"
                     android:visibility="invisible" />
@@ -139,7 +144,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dip"
-                android:text="青岛洪森集团超艺模具有限公司"
                 android:textColor="@color/graya"
                 android:textSize="12sp" />
 
@@ -149,7 +153,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:padding="10dip"
-                android:text="惠州市-惠阳区"
                 android:textColor="@color/graya"
                 android:textSize="12sp" />
         </RelativeLayout>

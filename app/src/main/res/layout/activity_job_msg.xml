@@ -45,7 +45,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/activity_vertical_margin"
-                    android:text="酒店茶艺师"
                     android:textColor="@color/alpha_85_black"
                     android:textSize="24sp" />
 
@@ -62,7 +61,6 @@
                         android:id="@+id/tv_salary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="3000-5000"
                         android:textColor="@color/salary"
                         android:textSize="22sp" />
 
@@ -78,7 +76,6 @@
                         android:id="@+id/tv_more_salary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="10"
                         android:textColor="@color/salary"
                         android:textSize="@dimen/normal_string_size" />
 
@@ -110,7 +107,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/text_margin"
-                        android:text="5人"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -133,7 +129,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/text_margin"
-                        android:text="初中及以上"
                         android:textColor="@color/black"
                         android:textSize="@dimen/job_text_size" />
                 </LinearLayout>
@@ -178,7 +173,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/text_margin"
-                        android:text="惠州惠阳淡水湖百花园远水岸2栋20号蒲佳佳顺"
                         android:textColor="@color/black"
                         android:textSize="@dimen/job_text_size" />
                 </LinearLayout>
@@ -230,7 +224,6 @@
                     android:id="@+id/tv_companyName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="青岛洪森集团超艺模具有限公司"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -254,7 +247,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/text_margin"
-                        android:text="20-99人"
                         android:textColor="@color/black"
                         android:textSize="@dimen/job_text_size" />
                 </LinearLayout>
@@ -278,7 +270,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/text_margin"
-                        android:text="民营"
                         android:textColor="@color/black"
                         android:textSize="@dimen/job_text_size" />
                 </LinearLayout>
@@ -315,7 +306,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/activity_vertical_margin"
                     android:lineSpacingExtra="3dp"
-                    android:text="收到福建省开绿灯飞机啊克里斯蒂积分卡司机打开了房间啊圣诞节风口浪尖阿道夫卢卡斯的解放路口计算"
                     android:textColor="@color/alpha_50_black"
                     android:textSize="@dimen/job_text_size" />
 

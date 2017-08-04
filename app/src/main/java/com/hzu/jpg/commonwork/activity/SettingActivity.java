@@ -18,6 +18,7 @@ import com.hzu.jpg.commonwork.enity.VersionParams;
 import com.hzu.jpg.commonwork.service.AVersionService;
 import com.hzu.jpg.commonwork.service.VersionService;
 import com.hzu.jpg.commonwork.utils.AppUtils;
+import com.hzu.jpg.commonwork.utils.Constants;
 import com.hzu.jpg.commonwork.utils.SharedPreferencesUtil;
 import com.hzu.jpg.commonwork.utils.ToastUtil;
 import com.hzu.jpg.commonwork.utils.cookieUtil.PersistentCookieJar;
@@ -28,7 +29,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import okhttp3.Call;
-import okhttp3.CookieJar;
 
 public class SettingActivity extends AppCompatActivity {
 
@@ -65,6 +65,7 @@ public class SettingActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         MyApplication.user = null;
+                        Constants.isLogin = false;
                         PersistentCookieJar cookieJar = (PersistentCookieJar) OkHttpUtils.getInstance().getOkHttpClient().cookieJar();
                         cookieJar.clear();
                         setResult(Config.EXIT);

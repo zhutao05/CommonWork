@@ -52,6 +52,8 @@ public class JobMsgAdapter extends BaseRvAdapter <JobMsg>{
 
         helper.setText(R.id.tv_salary_title,salary);
 
+        helper.setText(R.id.tv_recruits_number,"招聘人数："+item.getNumber());
+
         int length = item.getJobLabel().size();
         length = length > 3 ? 2 : length - 1;
 
