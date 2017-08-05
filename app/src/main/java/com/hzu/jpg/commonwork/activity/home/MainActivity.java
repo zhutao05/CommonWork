@@ -1,10 +1,9 @@
 package com.hzu.jpg.commonwork.activity.home;
 
 import android.content.Intent;
-import android.content.res.TypedArray;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,7 +21,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hzu.jpg.commonwork.R;
 import com.hzu.jpg.commonwork.action.RequestAction;
-import com.hzu.jpg.commonwork.activity.AdviceActivity;
 import com.hzu.jpg.commonwork.activity.ApplyJobActivity;
 import com.hzu.jpg.commonwork.activity.CityPickerActivity;
 import com.hzu.jpg.commonwork.activity.JobMsgActivity;
@@ -32,19 +30,14 @@ import com.hzu.jpg.commonwork.activity.WebViewActivity;
 import com.hzu.jpg.commonwork.activity.service.NewsDetailActivity;
 import com.hzu.jpg.commonwork.activity.service.PostsActivity;
 import com.hzu.jpg.commonwork.activity.service.ServiceActivity;
-import com.hzu.jpg.commonwork.adapter.HomeFunctionRVAdapter;
-import com.hzu.jpg.commonwork.adapter.JobMsgAdapter;
 import com.hzu.jpg.commonwork.adapter.home.MainAdapter;
 import com.hzu.jpg.commonwork.adapter.home.MainGridAdapter;
-import com.hzu.jpg.commonwork.adapter.service.NewsAdapter;
 import com.hzu.jpg.commonwork.app.Config;
 import com.hzu.jpg.commonwork.app.MyApplication;
 import com.hzu.jpg.commonwork.base.BaseRvAdapter;
 import com.hzu.jpg.commonwork.enity.home.JobVo;
-import com.hzu.jpg.commonwork.enity.moudle.JobMsg;
 import com.hzu.jpg.commonwork.enity.moudle.Picture;
 import com.hzu.jpg.commonwork.enity.service.NewsVo;
-import com.hzu.jpg.commonwork.fragment.mainFragment.HomeFragment;
 import com.hzu.jpg.commonwork.utils.GlideImageLoader;
 import com.hzu.jpg.commonwork.utils.ToastUtil;
 import com.hzu.jpg.commonwork.widgit.AutoVerticalScrollTextView;
@@ -66,7 +59,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.fangx.common.ui.fragment.BaseLazyFragment;
-import me.fangx.common.util.DensityUtils;
 import me.fangx.common.util.eventbus.EventCenter;
 import okhttp3.Call;
 
@@ -204,10 +196,11 @@ public class MainActivity extends BaseLazyFragment implements View.OnClickListen
             @Override
             public void onClick(View view) {
                 //startActivity(new Intent(getActivity(), ServiceActivity.class));
-                NewsVo.Data data = newsVo.getData().get(number);
+                /*NewsVo.Data data = newsVo.getData().get(number);
                 Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
                 intent.putExtra("data", data);
-                startActivity(intent);
+                startActivity(intent);*/
+                getActivity().startActivity(new Intent(getActivity(), PostsActivity.class));
             }
         });
 
