@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.hzu.jpg.commonwork.R;
 import com.hzu.jpg.commonwork.adapter.goods.GoodsAdapter;
 import com.hzu.jpg.commonwork.enity.service.NewsVo;
+import com.hzu.jpg.commonwork.utils.Constants;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -110,6 +111,8 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((ItemViewHolder) holder).title.setText(detail.getTitle());
             ((ItemViewHolder) holder).newsType.setText(detail.getNewsType());
             ((ItemViewHolder) holder).newsDate.setText(detail.getNewsDate());
+            imageLoader.displayImage(Constants.imageUrl +
+                    detail.getImgs(), ((ItemViewHolder) holder).mImgNews, options);
 
         }
     }
@@ -137,6 +140,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     static class ItemViewHolder extends RecyclerView.ViewHolder {
 
         TextView title, newsDate, newsType;
+        ImageView mImgNews;
 
 
         public ItemViewHolder(View view) {
@@ -144,6 +148,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             newsDate = (TextView) view.findViewById(R.id.newsDate);
             newsType = (TextView) view.findViewById(R.id.newsType);
             title = (TextView) view.findViewById(R.id.title);
+            mImgNews = (ImageView) view.findViewById(R.id.img_news);
         }
     }
 

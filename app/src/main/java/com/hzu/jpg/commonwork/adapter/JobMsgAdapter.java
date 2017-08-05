@@ -13,6 +13,7 @@ import com.hzu.jpg.commonwork.app.MyApplication;
 import com.hzu.jpg.commonwork.base.BaseRvAdapter;
 import com.hzu.jpg.commonwork.base.BaseViewHolder;
 import com.hzu.jpg.commonwork.enity.moudle.JobMsg;
+import com.hzu.jpg.commonwork.utils.Constants;
 import com.hzu.jpg.commonwork.utils.DialogUtil;
 import com.hzu.jpg.commonwork.utils.ToastUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -53,6 +54,7 @@ public class JobMsgAdapter extends BaseRvAdapter <JobMsg>{
         helper.setText(R.id.tv_salary_title,salary);
 
         helper.setText(R.id.tv_recruits_number,"招聘人数："+item.getNumber());
+        helper.setImageUrl(R.id.img_job, Constants.imageUrl + item.getCover());
 
         int length = item.getJobLabel().size();
         length = length > 3 ? 2 : length - 1;

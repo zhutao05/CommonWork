@@ -19,26 +19,34 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ImageView
+                android:id="@+id/img_job"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="5dp"/>
+
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/img_job"
                 android:layout_toLeftOf="@+id/tv_date"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:padding="10dip"
                 android:textColor="@color/black_4"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/tv_salary_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_title"
+                android:layout_toRightOf="@+id/img_job"
                 android:paddingBottom="10dip"
                 android:paddingLeft="10dip"
                 android:textColor="@color/salary"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/tv_recruits_number"
@@ -49,7 +57,7 @@
                 android:paddingBottom="10dip"
                 android:paddingLeft="10dip"
                 android:textColor="@color/black9"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/tv_date"
@@ -57,6 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:padding="10dip"
+                android:textSize="12sp"
                 android:textColor="@color/black_4"
                 android:visibility="visible" />
 
@@ -64,6 +73,7 @@
                 android:id="@+id/ll_welfare"
                 android:layout_width="match_parent"
                 android:layout_height="25dip"
+                android:layout_toRightOf="@+id/img_job"
                 android:layout_below="@+id/tv_salary_title"
                 android:layout_marginLeft="10dip"
                 android:layout_marginRight="10dip"
@@ -80,7 +90,7 @@
                     android:maxLines="1"
                     android:padding="3dp"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="13sp"
+                    android:textSize="10sp"
                     android:visibility="invisible" />
 
                 <TextView
@@ -94,7 +104,7 @@
                     android:maxLines="1"
                     android:padding="3dp"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="13sp"
+                    android:textSize="10sp"
                     android:visibility="invisible" />
 
                 <TextView
@@ -108,7 +118,7 @@
                     android:maxLines="1"
                     android:padding="3dp"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="13sp"
+                    android:textSize="10sp"
                     android:visibility="invisible" />
             </LinearLayout>
 

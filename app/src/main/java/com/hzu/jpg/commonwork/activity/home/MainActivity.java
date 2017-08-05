@@ -93,7 +93,7 @@ public class MainActivity extends BaseLazyFragment implements View.OnClickListen
     private JobVo jobVo;
     private BannerLayout bannerLayout;
     private static final int REQUEST_CODE_PICK_CITY = 0;
-    private String[] strings = new String[64];
+    private String[] strings;
     private boolean isRunning = true;
     private int number = 0;
     private View autoView_welfare;
@@ -203,7 +203,11 @@ public class MainActivity extends BaseLazyFragment implements View.OnClickListen
         autoView_welfare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), ServiceActivity.class));
+                //startActivity(new Intent(getActivity(), ServiceActivity.class));
+                NewsVo.Data data = newsVo.getData().get(number);
+                Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
+                intent.putExtra("data", data);
+                startActivity(intent);
             }
         });
 
@@ -448,6 +452,7 @@ public class MainActivity extends BaseLazyFragment implements View.OnClickListen
                                 listContent.setVisibility(View.VISIBLE);
                                 no_data_tv.setVisibility(View.GONE);
                                 listContent.setAdapter(newsAdapter);
+                                strings = new String[newsVo.getData().size()];
                                 for (int i = 0; i < newsVo.getData().size(); i++) {
                                     strings[i] = newsVo.getData().get(i).getTitle();
                                 }
@@ -480,7 +485,9 @@ public class MainActivity extends BaseLazyFragment implements View.OnClickListen
             if (msg.what == 199) {
                 verticalScrollTV.next();
                 number++;
-                verticalScrollTV.setText(strings[number % strings.length]);
+                if (number > (strings.length - 1))
+                    number = 0;
+                verticalScrollTV.setText(strings[number]);
             }
 
         }

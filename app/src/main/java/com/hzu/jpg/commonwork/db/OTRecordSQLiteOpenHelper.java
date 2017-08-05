@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class OTRecordSQLiteOpenHelper extends SQLiteOpenHelper {
     public OTRecordSQLiteOpenHelper(Context context) {
-        super(context, "ot_record", null, 7);
+        super(context, "ot_record.db", null, 7);
     }
 
     @Override
