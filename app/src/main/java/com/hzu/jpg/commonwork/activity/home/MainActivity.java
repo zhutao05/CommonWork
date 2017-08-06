@@ -1,10 +1,13 @@
 package com.hzu.jpg.commonwork.activity.home;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +17,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -96,6 +100,7 @@ public class MainActivity extends BaseLazyFragment implements View.OnClickListen
     private ListView listContent;
     private MainNewsAdapter newsAdapter;
     private TextView no_data_tv;
+    private final int ACCESS_COARSE_LOCATION_REQUEST_CODE = 1000;
 
     @Override
     protected void initViewsAndEvents() {
@@ -293,9 +298,39 @@ public class MainActivity extends BaseLazyFragment implements View.OnClickListen
 
     @OnClick(R.id.tv_location)
     public void onClick() {
-        //启动
-        startActivityForResult(new Intent(getContext(), CityPickerActivity.class),
-                REQUEST_CODE_PICK_CITY);
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (ActivityCompat.checkSelfPermission(this.getActivity(), android.Manifest.permission.ACCESS_COARSE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED
+                    || ActivityCompat.checkSelfPermission(this.getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
+                MainActivity.this.requestPermissions(
+                        new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                                android.Manifest.permission.ACCESS_FINE_LOCATION},
+                        ACCESS_COARSE_LOCATION_REQUEST_CODE);
+            } else {
+                startActivityForResult(new Intent(getContext(), CityPickerActivity.class),
+                        REQUEST_CODE_PICK_CITY);
+            }
+        } else {
+            //启动
+            startActivityForResult(new Intent(getContext(), CityPickerActivity.class),
+                    REQUEST_CODE_PICK_CITY);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == ACCESS_COARSE_LOCATION_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission Granted
+                startActivityForResult(new Intent(getContext(), CityPickerActivity.class),
+                        REQUEST_CODE_PICK_CITY);
+            } else {
+                // Permission Denied
+                Toast.makeText(this.getContext(), "访问被拒绝！", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override

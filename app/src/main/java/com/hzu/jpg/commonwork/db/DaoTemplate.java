@@ -79,8 +79,6 @@ public class DaoTemplate {
         String[] columns = new String[fields.length];
         List<Object> list = new ArrayList<>();
         for (int i = 0; i < fields.length; i++) {
-            if ("serialVersionUID".equals(fields[i].getName()))
-                continue;
             columns[i] = fields[i].getName();
         }
         Cursor cursor = db.query(false, table, columns, selection, selectionArgs, null, null, null, null);
