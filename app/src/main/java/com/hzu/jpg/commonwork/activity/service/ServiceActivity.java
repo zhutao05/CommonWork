@@ -1,11 +1,11 @@
 package com.hzu.jpg.commonwork.activity.service;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,7 +13,6 @@ import android.widget.ImageView;
 
 import com.hzu.jpg.commonwork.R;
 import com.hzu.jpg.commonwork.action.RequestAction;
-import com.hzu.jpg.commonwork.activity.goods.GoodsActivity;
 import com.hzu.jpg.commonwork.adapter.goods.GoodsAdapter;
 import com.hzu.jpg.commonwork.adapter.service.NewsAdapter;
 import com.hzu.jpg.commonwork.enity.service.NewsVo;
@@ -186,8 +185,12 @@ public class ServiceActivity extends AppCompatActivity implements View.OnClickLi
 
         @Override
         public void run() {
-            NameValuePair newsType_app = new BasicNameValuePair("newsType", newsType);
+            NameValuePair pageNo_app = new BasicNameValuePair("startPage", startPage + "");
+            NameValuePair pageSize_app = new BasicNameValuePair("pageSize", "10");
+            NameValuePair newsType_app = new BasicNameValuePair("classfy", newsType);
             List<NameValuePair> params = new ArrayList<>();
+            params.add(pageNo_app);
+            params.add(pageSize_app);
             params.add(newsType_app);
             newsVo = action.getNewsListDataAction(params);
             uiHandler.sendEmptyMessage(INIT_DATA_VIEW);

@@ -401,8 +401,12 @@ public class MainActivity extends BaseLazyFragment implements View.OnClickListen
 
         @Override
         public void run() {
-            NameValuePair newsType_app = new BasicNameValuePair("newsType", newsType);
+            NameValuePair pageNo_app = new BasicNameValuePair("startPage", 1 + "");
+            NameValuePair pageSize_app = new BasicNameValuePair("pageSize", "10");
+            NameValuePair newsType_app = new BasicNameValuePair("classfy", newsType);
             List<NameValuePair> params = new ArrayList<>();
+            params.add(pageNo_app);
+            params.add(pageSize_app);
             params.add(newsType_app);
             newsVo = action.getNewsListDataAction(params);
             newsAdapter = new MainNewsAdapter(getActivity(), newsVo.getData());
