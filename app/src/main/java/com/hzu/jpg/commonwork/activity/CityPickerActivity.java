@@ -1,6 +1,5 @@
 package com.hzu.jpg.commonwork.activity;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,7 +21,6 @@ import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClientOption;
 import com.hzu.jpg.commonwork.R;
 import com.hzu.jpg.commonwork.adapter.cityAdapter.CityListAdapter;
 import com.hzu.jpg.commonwork.adapter.cityAdapter.ResultListAdapter;
@@ -33,10 +31,7 @@ import com.hzu.jpg.commonwork.enity.City;
 import com.hzu.jpg.commonwork.enity.LocateState;
 import com.hzu.jpg.commonwork.event.AddressEvent;
 import com.hzu.jpg.commonwork.service.LocationService;
-import com.hzu.jpg.commonwork.utils.StringUtils;
-import com.hzu.jpg.commonwork.utils.XPermissionUtils;
 import com.hzu.jpg.commonwork.widgit.SideLetterBar;
-
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -112,7 +107,7 @@ public class CityPickerActivity extends AppCompatActivity implements View.OnClic
             }
         });
         mResultAdapter = new ResultListAdapter(this, null);
-        mCityAdapter.updateLocateState(LocateState.SUCCESS,Config.LOCATION_CITY);
+        mCityAdapter.updateLocateState(LocateState.LOCATING,Config.LOCATION_CITY);
     }
 
     private void startLocate(){

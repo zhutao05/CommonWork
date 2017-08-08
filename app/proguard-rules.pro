@@ -213,6 +213,7 @@ public static final org.codehaus.jackson.annotate.JsonAutoDetect$Visibility *; }
 -keep class com.hzu.jpg.commonwork.Presenter.**{*;}
 -keep class com.hzu.jpg.commonwork.Receiver.**{*;}
 -keep class com.hzu.jpg.commonwork.holder.**{*;}
+-keep class com.hzu.jpg.commonwork.HourWork.Bean.**{*;}
 
 #百度地图
 -keep class com.baidu.** { *; }

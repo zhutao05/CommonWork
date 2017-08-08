@@ -18,6 +18,7 @@ import com.hzu.jpg.commonwork.enity.VersionParams;
 import com.hzu.jpg.commonwork.service.AVersionService;
 import com.hzu.jpg.commonwork.service.VersionService;
 import com.hzu.jpg.commonwork.utils.AppUtils;
+import com.hzu.jpg.commonwork.utils.Constants;
 import com.hzu.jpg.commonwork.utils.SharedPreferencesUtil;
 import com.hzu.jpg.commonwork.utils.ToastUtil;
 import com.hzu.jpg.commonwork.utils.cookieUtil.PersistentCookieJar;
@@ -28,7 +29,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import okhttp3.Call;
-import okhttp3.CookieJar;
 
 public class SettingActivity extends AppCompatActivity {
 
@@ -36,6 +36,7 @@ public class SettingActivity extends AppCompatActivity {
     TextView tvUpdate;
     ImageButton ib;
     TextView tvResetPwd;
+    TextView tvAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +45,12 @@ public class SettingActivity extends AppCompatActivity {
         tvUpdate= (TextView) findViewById(R.id.tv_setting_update);
         btnExit= (Button) findViewById(R.id.btn_setting_exit);
         tvResetPwd = (TextView) findViewById(R.id.tv_resetPwd);
+        tvAddress = (TextView) findViewById(R.id.tv_address);
         ib= (ImageButton) findViewById(R.id.ib_setting_back);
         if(MyApplication.user==null){
             btnExit.setVisibility(View.GONE);
             tvResetPwd.setVisibility(View.GONE);
+            tvAddress.setVisibility(View.GONE);
         }
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +65,7 @@ public class SettingActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         MyApplication.user = null;
+                        Constants.isLogin = false;
                         PersistentCookieJar cookieJar = (PersistentCookieJar) OkHttpUtils.getInstance().getOkHttpClient().cookieJar();
                         cookieJar.clear();
                         setResult(Config.EXIT);
@@ -121,6 +125,14 @@ public class SettingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SettingActivity.this,RegisterSetPwdActivity.class);
                 intent.putExtra("isSetPwd",true);
+                startActivity(intent);
+            }
+        });
+
+        tvAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SettingActivity.this,MyAddressActivity.class);
                 startActivity(intent);
             }
         });

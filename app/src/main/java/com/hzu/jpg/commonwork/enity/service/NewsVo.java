@@ -35,6 +35,7 @@ public class NewsVo implements Serializable{
         private String href;
         private String newsDate;
         private String newsType;
+        private String imgs;
 
         public int getNewsId() {
             return newsId;
@@ -74,6 +75,14 @@ public class NewsVo implements Serializable{
 
         public void setNewsType(String newsType) {
             this.newsType = newsType;
+        }
+
+        public String getImgs() {
+            return imgs;
+        }
+
+        public void setImgs(String imgs) {
+            this.imgs = imgs;
         }
     }
 }

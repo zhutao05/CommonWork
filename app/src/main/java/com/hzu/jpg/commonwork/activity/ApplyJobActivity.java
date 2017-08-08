@@ -230,7 +230,7 @@ public class ApplyJobActivity extends BaseAppCompatActivity {
                 Intent intent = new Intent(ApplyJobActivity.this, JobMsgActivity.class);
                 Log.d(TAG, "onclick id:" + position);
                 Log.e(TAG, "onItemClick: " + adapter.getItem(position).getId(), null);
-                intent.putExtra(Config.ID, adapter.getItem(position).getId());
+                intent.putExtra(Config.ID, Integer.parseInt(adapter.getItem(position).getId()));
                 startActivity(intent);
             }
         });
