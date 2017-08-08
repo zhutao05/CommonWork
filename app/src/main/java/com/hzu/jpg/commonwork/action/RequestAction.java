@@ -1,7 +1,11 @@
 package com.hzu.jpg.commonwork.action;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.hzu.jpg.commonwork.app.Config;
+import com.hzu.jpg.commonwork.enity.AddressInfo;
+import com.hzu.jpg.commonwork.enity.AddressStatus;
 import com.hzu.jpg.commonwork.enity.goods.GoodsVo;
 import com.hzu.jpg.commonwork.enity.home.JobVo;
 import com.hzu.jpg.commonwork.enity.service.NewsVo;
@@ -33,6 +37,8 @@ public class RequestAction {
     private String addComment = "https://www.jiongzhiw.com/HRM/life/addComment.html";
     private String showSimpleInfoA = "https://www.jiongzhiw.com/HRM/job/showSimpleInfoA.html";
     private String andrlgByQq = "https://www.jiongzhiw.com/HRM/thirdPart/andrlgByQq.html";
+    private String getAddressList = "https://www.jiongzhiw.com/HRM/gAddr/getGAddrList.html";
+    private String addOrModifyAddress = "https://www.jiongzhiw.com/HRM/gAddr/upGAddr.html";
 
     public RequestAction(Context context) {
         hct = new HttpClientTool(context);
@@ -163,6 +169,45 @@ public class RequestAction {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return result;
+    }
+
+    /**
+     * 收货地址列表
+     *
+     * @param params
+     * @return
+     */
+    public AddressInfo getAddressInfo() {
+        AddressInfo addrVo = new AddressInfo();
+        String result = hct.doGet(getAddressList);
+        try {
+            addrVo = GjsonUtil.parseJsonWithGson(result, AddressInfo.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return addrVo;
+    }
+
+    /**
+     * 添加修改收货地址
+     *
+     * @param params
+     * @return
+     */
+    public AddressStatus addOrModifyAddress(List<NameValuePair> params) {
+        AddressStatus addrVo = new AddressStatus();
+        String result = hct.doPost(params, addOrModifyAddress);
+        try {
+            addrVo = GjsonUtil.parseJsonWithGson(result, AddressStatus.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return addrVo;
+    }
+
+    public String userLogin(List<NameValuePair> params){
+        String result = hct.doPost(params, Config.URL_STUDENT_LOGIN);
         return result;
     }
 }

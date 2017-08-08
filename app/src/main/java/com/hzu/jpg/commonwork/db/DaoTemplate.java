@@ -62,7 +62,8 @@ public class DaoTemplate {
         }
         try {
             db.beginTransaction();
-            db.insert(table, null, values);
+            //db.insert(table, null, values);
+            db.replace(table, null, values);
             db.setTransactionSuccessful();
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,11 +1,13 @@
 package com.hzu.jpg.commonwork.activity.home;
 
 import android.content.Intent;
-import android.content.res.TypedArray;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -22,7 +25,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hzu.jpg.commonwork.R;
 import com.hzu.jpg.commonwork.action.RequestAction;
-import com.hzu.jpg.commonwork.activity.AdviceActivity;
 import com.hzu.jpg.commonwork.activity.ApplyJobActivity;
 import com.hzu.jpg.commonwork.activity.CityPickerActivity;
 import com.hzu.jpg.commonwork.activity.JobMsgActivity;
@@ -32,19 +34,14 @@ import com.hzu.jpg.commonwork.activity.WebViewActivity;
 import com.hzu.jpg.commonwork.activity.service.NewsDetailActivity;
 import com.hzu.jpg.commonwork.activity.service.PostsActivity;
 import com.hzu.jpg.commonwork.activity.service.ServiceActivity;
-import com.hzu.jpg.commonwork.adapter.HomeFunctionRVAdapter;
-import com.hzu.jpg.commonwork.adapter.JobMsgAdapter;
 import com.hzu.jpg.commonwork.adapter.home.MainAdapter;
 import com.hzu.jpg.commonwork.adapter.home.MainGridAdapter;
-import com.hzu.jpg.commonwork.adapter.service.NewsAdapter;
 import com.hzu.jpg.commonwork.app.Config;
 import com.hzu.jpg.commonwork.app.MyApplication;
 import com.hzu.jpg.commonwork.base.BaseRvAdapter;
 import com.hzu.jpg.commonwork.enity.home.JobVo;
-import com.hzu.jpg.commonwork.enity.moudle.JobMsg;
 import com.hzu.jpg.commonwork.enity.moudle.Picture;
 import com.hzu.jpg.commonwork.enity.service.NewsVo;
-import com.hzu.jpg.commonwork.fragment.mainFragment.HomeFragment;
 import com.hzu.jpg.commonwork.utils.GlideImageLoader;
 import com.hzu.jpg.commonwork.utils.ToastUtil;
 import com.hzu.jpg.commonwork.widgit.AutoVerticalScrollTextView;
@@ -66,7 +63,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.fangx.common.ui.fragment.BaseLazyFragment;
-import me.fangx.common.util.DensityUtils;
 import me.fangx.common.util.eventbus.EventCenter;
 import okhttp3.Call;
 
@@ -93,7 +89,7 @@ public class MainActivity extends BaseLazyFragment implements View.OnClickListen
     private JobVo jobVo;
     private BannerLayout bannerLayout;
     private static final int REQUEST_CODE_PICK_CITY = 0;
-    private String[] strings = new String[64];
+    private String[] strings;
     private boolean isRunning = true;
     private int number = 0;
     private View autoView_welfare;
@@ -104,6 +100,7 @@ public class MainActivity extends BaseLazyFragment implements View.OnClickListen
     private ListView listContent;
     private MainNewsAdapter newsAdapter;
     private TextView no_data_tv;
+    private final int ACCESS_COARSE_LOCATION_REQUEST_CODE = 1000;
 
     @Override
     protected void initViewsAndEvents() {
@@ -203,7 +200,12 @@ public class MainActivity extends BaseLazyFragment implements View.OnClickListen
         autoView_welfare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), ServiceActivity.class));
+                //startActivity(new Intent(getActivity(), ServiceActivity.class));
+                /*NewsVo.Data data = newsVo.getData().get(number);
+                Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
+                intent.putExtra("data", data);
+                startActivity(intent);*/
+                getActivity().startActivity(new Intent(getActivity(), PostsActivity.class));
             }
         });
 
@@ -296,9 +298,39 @@ public class MainActivity extends BaseLazyFragment implements View.OnClickListen
 
     @OnClick(R.id.tv_location)
     public void onClick() {
-        //启动
-        startActivityForResult(new Intent(getContext(), CityPickerActivity.class),
-                REQUEST_CODE_PICK_CITY);
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (ActivityCompat.checkSelfPermission(this.getActivity(), android.Manifest.permission.ACCESS_COARSE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED
+                    || ActivityCompat.checkSelfPermission(this.getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
+                MainActivity.this.requestPermissions(
+                        new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                                android.Manifest.permission.ACCESS_FINE_LOCATION},
+                        ACCESS_COARSE_LOCATION_REQUEST_CODE);
+            } else {
+                startActivityForResult(new Intent(getContext(), CityPickerActivity.class),
+                        REQUEST_CODE_PICK_CITY);
+            }
+        } else {
+            //启动
+            startActivityForResult(new Intent(getContext(), CityPickerActivity.class),
+                    REQUEST_CODE_PICK_CITY);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == ACCESS_COARSE_LOCATION_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission Granted
+                startActivityForResult(new Intent(getContext(), CityPickerActivity.class),
+                        REQUEST_CODE_PICK_CITY);
+            } else {
+                // Permission Denied
+                Toast.makeText(this.getContext(), "访问被拒绝！", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
@@ -369,8 +401,12 @@ public class MainActivity extends BaseLazyFragment implements View.OnClickListen
 
         @Override
         public void run() {
-            NameValuePair newsType_app = new BasicNameValuePair("newsType", newsType);
+            NameValuePair pageNo_app = new BasicNameValuePair("startPage", 1 + "");
+            NameValuePair pageSize_app = new BasicNameValuePair("pageSize", "10");
+            NameValuePair newsType_app = new BasicNameValuePair("classfy", newsType);
             List<NameValuePair> params = new ArrayList<>();
+            params.add(pageNo_app);
+            params.add(pageSize_app);
             params.add(newsType_app);
             newsVo = action.getNewsListDataAction(params);
             newsAdapter = new MainNewsAdapter(getActivity(), newsVo.getData());
@@ -448,6 +484,7 @@ public class MainActivity extends BaseLazyFragment implements View.OnClickListen
                                 listContent.setVisibility(View.VISIBLE);
                                 no_data_tv.setVisibility(View.GONE);
                                 listContent.setAdapter(newsAdapter);
+                                strings = new String[newsVo.getData().size()];
                                 for (int i = 0; i < newsVo.getData().size(); i++) {
                                     strings[i] = newsVo.getData().get(i).getTitle();
                                 }
@@ -480,7 +517,9 @@ public class MainActivity extends BaseLazyFragment implements View.OnClickListen
             if (msg.what == 199) {
                 verticalScrollTV.next();
                 number++;
-                verticalScrollTV.setText(strings[number % strings.length]);
+                if (number > (strings.length - 1))
+                    number = 0;
+                verticalScrollTV.setText(strings[number]);
             }
 
         }

@@ -35,7 +35,7 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="PZRcrHz788IaD6VZIPGd0GMt6xSYCdjg" />
+            android:value="LeUUBoRw9eZ32gGeOwF2OaojhU0B9xXL" />
 
         <activity android:name=".activity.HomeActivity" />
         <activity android:name=".activity.WelcomeActivity">
@@ -116,6 +116,16 @@
             android:enabled="true"
             android:exported="true" />
 
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote">
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v2.2">
+                </action>
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".activity.VersionDialogActivity"
             android:launchMode="singleTask"
@@ -161,6 +171,8 @@
         <activity android:name=".activity.goods.GoodsDetailActivity" />
         <activity android:name=".activity.MobileBindingActivity" />
         <activity android:name=".activity.BindingUserActivity" />
+        <activity android:name=".activity.MyAddressActivity" />
+        <activity android:name=".activity.AddAddressActivity" />
 
         <receiver
             android:name=".utils.AppRegister"
